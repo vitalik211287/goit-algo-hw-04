@@ -43,14 +43,12 @@ results = []
 for size in sizes:
     lst = [random.randint(0, 10000) for _ in range(size)]
     setup = f"""
-from __main__ import insertion_sort, merge_sort, lst
-import random
 lst = {lst}
 """
     
-    time_insertion = timeit.timeit("insertion_sort(lst[:])", setup=setup, number=1)
-    time_merge = timeit.timeit("merge_sort(lst[:])", setup=setup, number=1)
-    time_timsort = timeit.timeit("sorted(lst)", setup=setup, number=1)
+    time_insertion = timeit.timeit("insertion_sort(lst[:])", setup=setup, globals=globals(), number=1)
+    time_merge = timeit.timeit("merge_sort(lst[:])", setup=setup, globals=globals(), number=1)
+    time_timsort = timeit.timeit("sorted(lst)", setup=setup, globals=globals(), number=1)
 
     results.append((size, time_insertion, time_merge, time_timsort))
 
